@@ -43,6 +43,7 @@ def convert_datatypes_ibd(df):
 
     return df
 
+
 def latest_file():
     """
     find latest file from the IBD_Excel directory
@@ -53,6 +54,6 @@ def latest_file():
     combined_str = ''.join(file_list)
 
     file_date = re.findall(r'\/(.*?)\_', combined_str)
-    latest_file = 'IBD_Excel/' + max(file_date) + '_IBD.xlsx'
+    filename = 'IBD_Excel/' + max(file_date) + '_IBD.xlsx'
 
-    return latest_file
+    return filename
