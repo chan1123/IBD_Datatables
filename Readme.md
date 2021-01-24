@@ -17,7 +17,7 @@ from functions import latest_file
 df = convert_datatypes_ibd(read_ibd(latest_file()))
 ```
 
-RS Rating
+# RS Rating
 
 Look for RS greater than 80
 
