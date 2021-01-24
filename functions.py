@@ -1,5 +1,9 @@
 import pandas as pd
-from variables import abcde_map, abcde_plus_map, abcde_plus_list, abcde_list, numeric_list
+import glob
+import re
+from variables import abcde_map, abcde_plus_map
+from variables import abcde_plus_list, abcde_list, numeric_list
+
 
 def read_ibd(filename):
     """
@@ -20,7 +24,13 @@ def read_ibd(filename):
 
 
 def convert_datatypes_ibd(df):
-
+    """
+    Convert the letter rankings to numbers
+    Covert numeric values
+    Convert IPO dates to datetime
+    :param df:
+    :return: df
+    """
     df[numeric_list] = df[numeric_list].apply(pd.to_numeric, errors='coerce')
 
     for item in abcde_list:
@@ -33,3 +43,16 @@ def convert_datatypes_ibd(df):
 
     return df
 
+def latest_file():
+    """
+    find latest file from the IBD_Excel directory
+    :return: filename
+    """
+
+    file_list = glob.glob("IBD_Excel/*.xlsx")
+    combined_str = ''.join(file_list)
+
+    file_date = re.findall(r'\/(.*?)\_', combined_str)
+    latest_file = 'IBD_Excel/' + max(file_date) + '_IBD.xlsx'
+
+    return latest_file
